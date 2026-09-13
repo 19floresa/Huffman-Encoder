@@ -16,11 +16,11 @@ class HashMap
 {
    private:
       std::vector<Node_t> buckets = {};
-      const float load_factor = 0.75f;
-      uint32_t total_size = 0;
+      uint32_t total_buckets = 0;
+      uint32_t total_nodes = 0;
       uint64_t fnv_1a_hash(std::string s);
-      uint64_t calculate_bucket(uint64_t hash);
-      float calculate_load_factor(void);
+      uint32_t calculate_bucket(uint64_t hash);
+      bool isBalanced(void);
 
    public:
       HashMap(void);

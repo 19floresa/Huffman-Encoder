@@ -6,18 +6,20 @@
  */
 
 #include <iostream>
+#include <cmath>
 #include "hash_map.h"
 
 HashMap::HashMap(void)
 {
-   total_size = 32;
-   buckets = std::vector<Node_t>(total_size);
+   total_nodes = 0;
+   total_buckets = 32;
+   buckets = std::vector<Node_t>(total_buckets);
 }
 
 void HashMap::insert(std::string s)
 {
    std::cout << s << std::endl;
-   const uint64_t hash   = fnv_1a_hash(s);
+   const uint64_t hash   = 10; //fnv_1a_hash(s);
    const uint32_t bucket = calculate_bucket(hash);
 }
 
@@ -26,7 +28,7 @@ void HashMap::insert(std::string s)
  */
 uint32_t HashMap::calculate_bucket(uint64_t hash)
 {
-   return hash % total_size;
+   return hash % total_buckets;
 }
 
 /**
@@ -49,4 +51,22 @@ uint64_t HashMap::fnv_1a_hash(std::string s)
    return hash;
 #undef FNV_OFFSET
 #undef FNV_PRIME
+}
+
+/**
+ * Check if their is still enough space before we need to rebuild
+ * the hash map.
+ *
+ * Source: https://en.wikipedia.org/wiki/Hash_table
+ */
+bool HashMap::isBalanced(void)
+{
+#define LOAD_FACTOR 0.75f
+#define EPSILON 1e-5f
+#define ARE_FLOAT_EQUAL(a,b) std::fabs(a - b) < EPSILON
+   const float current_load_factor = total_nodes / total_buckets;
+   return ARE_FLOAT_EQUAL(current_load_factor, LOAD_FACTOR);
+#undef LOAD_FACTOR
+#undef EPSILON
+#undef ARE_FLOAT_EQUAL
 }
