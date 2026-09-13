@@ -11,27 +11,19 @@
 #include <vector>
 #include <iostream>
 
-class Node
+typedef struct
 {
-   private:
-      char data;
-      uint32_t count;
-
-   public:
-      Node(char d, uint32_t c);
-
-      char getData(void);
-
-      uint32_t getValue(void);
-};
+   char data;
+   uint32_t value;
+} Node_t;
 
 class MinHeap
 {
    private:
-      std::vector<Node>nodes;
+     std::vector<Node_t> nodes = {};
 
    public:
-      void insert(char c);
+      void insert(char d, uint32_t c);
       void pop(void);
 };
 

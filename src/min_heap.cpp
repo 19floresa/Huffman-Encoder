@@ -7,31 +7,36 @@
 
 #include "min_heap.h"
 
-class Node
+void MinHeap::insert(char d, uint32_t v)
 {
-   private:
-      char data;
-      uint32_t count;
+   uint32_t cur, parent;
+   const Node_t new_node = { .data = d, .value = v };
+   nodes.push_back(new_node);
 
-   public:
-      Node(char d, uint32_t c)
+   cur = nodes.size() - 1;
+   while (cur != 0)
+   {
+      parent = (cur  - 1) / 2;
+      if (nodes[parent].value > nodes[cur].value)
       {
-         data = d;
-         count = c;
+         const Node_t temp = nodes[parent];
+         nodes[parent] = nodes[cur];
+         nodes[cur] = temp;
       }
-
-      char getData(void)
+      else
       {
-         return data;
+         // Found spot for node!
+         break;
       }
+      cur = parent;
+   }
+}
 
-      uint32_t getValue(void)
-      {
-         return count;
-      }
-};
-
-void MinHeap::insert(char c)
+void MinHeap::pop(void)
 {
-   std::cout << c;
+   for (Node_t node: nodes)
+   {
+      std::cout << node.data << std::endl;
+      //std::cout << node.value << std::endl;
+   }
 }
