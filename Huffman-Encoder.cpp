@@ -18,7 +18,7 @@ int main(void)
    min_heap.insert('d', 4);
    min_heap.insert('c', 3);
 
-   for (uint32_t i = 0; i < 5; i ++)
+   while (!min_heap.isEmpty())
    {
       std::cout << "-------------------------" << std::endl;
       const char removed = min_heap.pop();

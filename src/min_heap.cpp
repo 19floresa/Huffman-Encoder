@@ -85,9 +85,9 @@ char MinHeap::pop(void)
 }
 
 /**
- * Get the size of the heap.
+ * Check if the heap is empty.
  */
-uint32_t MinHeap::size(void)
+bool MinHeap::isEmpty(void)
 {
-   return nodes.size();
+   return nodes.size() == 0;
 }
