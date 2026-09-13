@@ -16,9 +16,10 @@ class HashMap
 {
    private:
       std::vector<Node_t> buckets = {};
-      const float load_factor = 0.60f;
+      const float load_factor = 0.75f;
       uint32_t total_size = 0;
-      uint32_t hash_function(char c);
+      uint64_t fnv_1a_hash(std::string s);
+      uint64_t calculate_bucket(uint64_t hash);
       float calculate_load_factor(void);
 
    public:
