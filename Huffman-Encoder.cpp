@@ -8,6 +8,7 @@
 
 #include "encoder.h"
 #include "min_heap.h"
+#include "hash_map.h"
 
 int main(void)
 {

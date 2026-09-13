@@ -7,4 +7,9 @@
 
 #include "hash_map.h"
 
+HashMap::HashMap(void)
+{
+//   total_size = 32;
+//   buckets = std::vector<Node_t>(total_size);
+}
 

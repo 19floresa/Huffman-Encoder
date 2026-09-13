@@ -9,13 +9,7 @@
 #define INCLUDE_MIN_HEAP_H_
 
 #include <vector>
-#include <iostream>
-
-typedef struct
-{
-   char data;
-   uint32_t value;
-} Node_t;
+#include "node.h"
 
 class MinHeap
 {
@@ -23,8 +17,8 @@ class MinHeap
      std::vector<Node_t> nodes = {};
 
    public:
-      void insert(char d, uint32_t c);
-      char pop(void);
+      void insert(Node_t node);
+      std::string pop(void);
       bool isEmpty(void);
 };
 

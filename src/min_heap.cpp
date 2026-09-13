@@ -10,17 +10,16 @@
 /**
  * Insert item to the heap.
  */
-void MinHeap::insert(char d, uint32_t v)
+void MinHeap::insert(Node_t node)
 {
    uint32_t cur, parent;
-   const Node_t new_node = { .data = d, .value = v };
-   nodes.push_back(new_node);
+   nodes.push_back(node);
 
    cur = nodes.size() - 1;
    while (cur != 0)
    {
       parent = (cur  - 1) / 2;
-      if (nodes[parent].value > nodes[cur].value)
+      if (nodes[parent].count > nodes[cur].count)
       {
          const Node_t temp = nodes[parent];
          nodes[parent] = nodes[cur];
@@ -38,10 +37,10 @@ void MinHeap::insert(char d, uint32_t v)
 /**
  * Remove item from the heap;
  */
-char MinHeap::pop(void)
+std::string MinHeap::pop(void)
 {
    uint32_t cur, left, right, least;
-   const char res = nodes[0].data;
+   const std::string res = nodes[0].data;
    const uint32_t end = nodes.size() - 1;
 
    // Remove last element
@@ -57,12 +56,12 @@ char MinHeap::pop(void)
          right = (cur * 2) + 2;
          least = cur;
 
-         if ((left <= end) && (nodes[least].value > nodes[left].value))
+         if ((left <= end) && (nodes[least].count > nodes[left].count))
          {
             least = left;
          }
 
-         if ((right <= end) && (nodes[least].value > nodes[right].value))
+         if ((right <= end) && (nodes[least].count > nodes[right].count))
          {
             least = right;
          }
