@@ -24,7 +24,8 @@ class MinHeap
 
    public:
       void insert(char d, uint32_t c);
-      void pop(void);
+      char pop(void);
+      uint32_t size(void);
 };
 
 #endif /* INCLUDE_MIN_HEAP_H_ */
