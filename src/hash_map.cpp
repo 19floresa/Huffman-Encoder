@@ -12,18 +12,18 @@
 HashMap::HashMap(void)
 {
    total_nodes = 0;
-   total_buckets = 20;//32;
+   total_buckets = 32;
    buckets = std::vector<Node_t>(total_buckets);
 }
 
-void HashMap::insert(std::string s, bool print)
+void HashMap::insert(std::string s, uint32_t c)
 {
    const uint64_t hash   = fnv_1a_hash(s);
    const uint32_t bucket = calculate_bucket(hash);
    if (buckets[bucket].count == 0)
    {
       // Found empty node!
-      insertNode(bucket, s, hash);
+      insertNode(bucket, s, c);
    }
    else
    {
@@ -32,7 +32,7 @@ void HashMap::insert(std::string s, bool print)
       uint32_t i;
       for (i = bucket; i < total_buckets; i++)
       {
-         if (insertNode(i, s, hash))
+         if (insertNode(i, s, c))
          {
             break;
          }
@@ -43,27 +43,17 @@ void HashMap::insert(std::string s, bool print)
       {
          for (i = 0; i < bucket; i++)
          {
-            if (insertNode(i, s, hash))
+            if (insertNode(i, s, c))
             {
                break;
             }
          }
       }
    }
-//   std::cout << s << std::endl;
-//   std::cout << "Hash:   " << hash << std::endl;
-//   std::cout << "Bucket: " << bucket << std::endl;
 
-   if (print)
+   if (!isBalanced())
    {
-         int j = 0;
-         for (Node_t bucket : buckets)
-         {
-            std::cout << "Index: " << j << std::endl;
-            std::cout << "Data:  " << bucket.data << std::endl;
-            std::cout << "Count: " << bucket.count << std::endl;
-            j += 1;
-         }
+      rebalance();
    }
 }
 
@@ -107,21 +97,36 @@ bool HashMap::isBalanced(void)
 {
 #define LOAD_FACTOR 0.75f
 #define EPSILON 1e-5f
-#define ARE_FLOAT_EQUAL(a,b) std::fabs(a - b) < EPSILON
-   const float current_load_factor = total_nodes / total_buckets;
-   return ARE_FLOAT_EQUAL(current_load_factor, LOAD_FACTOR);
+   float current_load_factor = static_cast<float>(total_nodes) / total_buckets;
+   return (current_load_factor - LOAD_FACTOR) < EPSILON;
 #undef LOAD_FACTOR
 #undef EPSILON
-#undef ARE_FLOAT_EQUAL
 }
 
-bool HashMap::insertNode(uint32_t i, std::string s, uint32_t hash)
+/**
+ * Rebalance hash table by creating a new hash table and reinserting old nodes.
+ */
+void HashMap::rebalance(void)
+{
+   total_buckets <<= 2;
+   const std::vector<Node_t> old_buckets = buckets;
+   const std::vector<Node_t> new_buckets(total_buckets);
+   buckets = new_buckets;
+   for (Node_t bucket: old_buckets)
+   {
+      insert(bucket.data, bucket.count);
+   }
+}
+
+/**
+ * Insert node into the specified node.
+ */
+bool HashMap::insertNode(uint32_t i, std::string s, uint32_t c)
 {
    if (buckets[i].count == 0)
    {
       buckets[i].data  = s;
-      buckets[i].count = 1;
-      buckets[i].hash  = hash;
+      buckets[i].count = c;
       total_nodes += 1;
       return true;
    }

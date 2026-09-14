@@ -15,7 +15,6 @@ typedef struct
 {
    std::string data  = "";
    uint32_t    count = 0;
-   uint64_t    hash  = 0;
 } Node_t;
 
 #endif /* INCLUDE_NODE_H_ */

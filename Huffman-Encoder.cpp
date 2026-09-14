@@ -17,11 +17,15 @@ int main(void)
    hash_map.insert("Hello World!");
    hash_map.insert("How are you?");
    hash_map.insert("I am good!");
-   hash_map.insert("c", false);
-   hash_map.insert("c", false);
-   hash_map.insert("c", false);
-   hash_map.insert("c", false);
-   hash_map.insert("c", false);
-   hash_map.insert("c", true);
+   hash_map.insert("c");
+   hash_map.insert("c");
+   hash_map.insert("c");
+   hash_map.insert("c");
+   hash_map.insert("c");
+   hash_map.insert("c");
+   hash_map.insert("a");
+   hash_map.insert("b");
+   hash_map.insert("d");
+   hash_map.insert("e");
    return 0;
 }
