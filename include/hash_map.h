@@ -21,10 +21,10 @@ class HashMap
       uint64_t fnv_1a_hash(std::string s);
       uint32_t calculate_bucket(uint64_t hash);
       bool isBalanced(void);
-
+      bool insertNode(uint32_t i, std::string s, uint32_t hash);
    public:
       HashMap(void);
-      void insert(std::string s);
+      void insert(std::string s, bool print=false);
 
 };
 

@@ -15,5 +15,13 @@ int main(void)
 {
    HashMap hash_map;
    hash_map.insert("Hello World!");
-	return 0;
+   hash_map.insert("How are you?");
+   hash_map.insert("I am good!");
+   hash_map.insert("c", false);
+   hash_map.insert("c", false);
+   hash_map.insert("c", false);
+   hash_map.insert("c", false);
+   hash_map.insert("c", false);
+   hash_map.insert("c", true);
+   return 0;
 }
