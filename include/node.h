@@ -11,10 +11,12 @@
 #include <string>
 #include <cstdint>
 
-typedef struct
+typedef struct Node_t
 {
    std::string data  = "";
    uint32_t    count = 0;
+   Node_t *    left  = nullptr;
+   Node_t *    right = nullptr;
 } Node_t;
 
 #endif /* INCLUDE_NODE_H_ */
