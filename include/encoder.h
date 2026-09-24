@@ -8,8 +8,15 @@
 #ifndef INCLUDE_ENCODER_H_
 #define INCLUDE_ENCODER_H_
 
+#include "node.h"
 
-void HelloWorld(void);
+class HuffmanEncoder
+{
+   private:
+      Node_t encodedTree = {};
+   public:
+      void encode(std::string filename);
+};
 
 
 #endif /* INCLUDE_ENCODER_H_ */

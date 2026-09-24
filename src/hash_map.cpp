@@ -5,7 +5,6 @@
  *      Author: floresa
  */
 
-#include <iostream>
 #include <cmath>
 #include "hash_map.h"
 
